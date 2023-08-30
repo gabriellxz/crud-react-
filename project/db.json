@@ -1,7 +1,16 @@
 {
     "posts": [
         {
-            "title": "Olá"
+            "id": 1,
+            "title": "Aluno",
+            "description": "Cadastro de aluno",
+            "content": "Aluno Cadastrado"
+        },
+        {
+            "id": 2,
+            "title": "Professor",
+            "description": "Cadastro de professor",
+            "content": "Professor Cadastrado"
         }
     ]
 }

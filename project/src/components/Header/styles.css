@@ -3,4 +3,6 @@ header {
     width: 100%;
     text-align: center;
     padding: 1rem 0;
+    display: flex;
+    justify-content: space-around;
 }

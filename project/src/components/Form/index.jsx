@@ -11,25 +11,15 @@ const postSchema = yup.object({
   description: yup.string().required("Preencha sua descrição"),
 })
 
-export function Form({ title, button }) {
+export function Form({ title, button, onAction }) {
 
-  const navigate = useNavigate()
-
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(postSchema)
   })
 
-  function handleSubmitPost(data) {
-    api.post("/posts", data)
-    .then(() => {
-      navigate("/")
-    })
-    reset()
-    console.log(data)
-  }
 
   return (
-    <form onSubmit={handleSubmit(handleSubmitPost)}>
+    <form onSubmit={handleSubmit(onAction)}>
       <h2>{title}</h2>
       <div className="field">
         <input placeholder="Título" {...register("title")} />
@@ -46,7 +36,7 @@ export function Form({ title, button }) {
         {errors.content?.message}
       </div>
 
-      <button>{button}</button>
+      <button type="sunmit" >{button}</button>
     </form>
   );
 }

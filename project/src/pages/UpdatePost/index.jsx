@@ -9,7 +9,7 @@ export function UpdatePost() {
 
     function handleUpdatePost(data) {
         api.put(`/posts/${id}`, data)
-        navigate("/")
+        navigate('/')
     }
 
     // useEffect(() => {
@@ -21,7 +21,7 @@ export function UpdatePost() {
 
     return (
         <div>
-            <Form title={"Editar publicação"} button={"Atualizar"} onAction={handleUpdatePost} />
+            <Form title={"Editar publicação"} button={"Atualizar"} onAction={handleUpdatePost}/>
         </div>
     )
 }

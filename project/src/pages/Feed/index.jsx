@@ -17,11 +17,16 @@ export function Feed() {
       })
   }, [])
 
+  function handleDelete(id) {
+    api.delete(`posts/${id}`)
+    setPost(post.filter(post => post.id !== id))
+  }
+
   return (
     <div className="feedContainer">
       {
         post.map((posts) => (
-          <Card key={posts.id} post={posts}/>
+          <Card key={posts.id} post={posts} handleDeletePost={handleDelete}/>
         ))
       }
     </div>

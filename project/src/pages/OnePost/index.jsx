@@ -1,14 +1,27 @@
+import { useEffect, useState } from "react";
 import "./styles.css";
+import api from '../../lib/axios'
+import { useParams } from "react-router-dom";
 
 export function OnePost() {
+
+  const [post, setPost] = useState({})
+  const {id} = useParams()
+
+  async function getPost() {
+    const response = await api.get(`/posts/${id}`)
+    setPost(response.data)
+  }
+
+  useEffect(() => {
+    getPost()
+  }, [])
+
   return (
     <article className="onePostContainer">
-      <h2>Olá esse é o projeto</h2>
+      <h2>{post.title}</h2>
       <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-        inventore officia laborum, similique at ab aut eveniet corporis
-        dignissimos vitae aperiam tempore repellendus ad vero nulla voluptatem
-        molestiae nostrum tenetur!
+        {post.description}
       </p>
     </article>
   );

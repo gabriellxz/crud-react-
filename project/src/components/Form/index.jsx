@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form'
 import api from '../../lib/axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect } from "react";
 
 const postSchema = yup.object({
   title: yup.string().required("Preencha o título"),
@@ -13,9 +14,20 @@ const postSchema = yup.object({
 
 export function Form({ title, button, onAction }) {
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {id} = useParams()
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(postSchema)
   })
+
+  async function getPostUpdate() {
+    const response = await api.get(`/posts/${id}`)
+    reset(response.data)
+  }
+
+  useEffect(() => {
+    getPostUpdate()
+  }, [])
 
 
   return (
@@ -36,7 +48,7 @@ export function Form({ title, button, onAction }) {
         {errors.content?.message}
       </div>
 
-      <button type="sunmit" >{button}</button>
+      <button type="submit">{button}</button>
     </form>
   );
 }

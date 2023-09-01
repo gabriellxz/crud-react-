@@ -21,7 +21,7 @@ export function OnePost() {
     <article className="onePostContainer">
       <h2>{post.title}</h2>
       <p>
-        {post.description}
+        {post.content}
       </p>
     </article>
   );
